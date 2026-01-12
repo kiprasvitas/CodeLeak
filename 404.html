@@ -1,0 +1,102 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Code Leak | 404</title>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="search_assets/assets/images/search-meta.png">
+<meta property="og:image" content="search_assets/assets/images/search-meta.png">
+<meta name="twitter:title" content="Code Leak | 404">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<link rel="shortcut icon" href="search_assets/assets/images/logo-128x108.png" type="image/x-icon">
+<meta name="description" content="Error 404. Page not found.">
+
+<div id="main">
+    	<div class="fof">
+        		<h1>Error 404</h1>
+				<p>Oops... looks like you're lost</p><br>
+				<button onclick="window.location.href = 'https://codeleak.dev';" class="button button4" >Go Home</button>
+    	</div>
+</div>
+
+<style>
+*{
+    transition: all 0.6s;
+}
+
+html {
+    height: 100%;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    color: #888;
+    margin: 0;
+	background-color: black;
+}
+
+#notf {
+	width: 15%;
+	height: auto;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 12px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button4 {
+	background-color: black;
+    color: white;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.button4:hover {
+	background-color: #e7e7e7;
+	color: black;
+}
+
+p {
+	color: white;
+}
+
+#main{
+    display: table;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.fof{
+	  display: table-cell;
+	  vertical-align: middle;
+}
+
+.fof h1{
+	color: #fc5130;
+	margin: 15px;
+	  font-size: 50px;
+	  display: inline-block;
+	  padding-right: 12px;
+	  animation: type .5s alternate infinite;
+}
+
+@keyframes type{
+	  from{box-shadow: inset -3px 0px 0px #fc5130;}
+	  to{box-shadow: inset -3px 0px 0px transparent;}
+}
+
+@media (max-width: 768px) {
+	#notf {
+		width: 50%;
+	}
+}
+</style>

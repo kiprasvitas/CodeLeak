@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Code Leak | App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+<link rel="shortcut icon" type="image/x-icon" href="logo.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+<meta name="description" content="Share your code with the public.">
+<meta property="og:image" content="logo.png">
+<meta name="keywords" content="Code, leak, share, public code, github, codepen">
+<meta name="author" content="Kipras Vitas">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<div id="main-content" class="container mt-3">
+
+	<div class="page card" id="page-chat">
+		<div class="card-header">
+		  <div><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a>
+		  <div id="search-div" >
+			  <input class="form-control mb-2" onchange="searchPosts()" id="search" placeholder="Search for code"/><button class="btn2 btn-primary" id="searchbtn"><i class="fa fa-search"></i></button>
+		  </div>
+		  <button style="float:right; display:flex;" class="btn1 btn-primary" id="accbtn" onclick="account()"><span id="account-txt">Login / Sign up</span></button>
+		  <button style="float:right; display:none;" class="btn2 btn-primary" id="upbtn" onclick="upload()">Upload A Leak</button></div>
+		</div>
+		<div class="card-content" id="chat-wrap">
+			<div class="card navbar">
+				<form class="form-inline centerbtn">
+					<button id="selected" class="btn1 navbtnleft btn-primary" onclick="reload();" type="button">Leaks</button>
+					<button id="nonselected" class="btn1 navbtnright btn-primary" onclick="forums(10);" type="button">Forums</button>
+				</form>
+			</div>
+			<div id="postcollection"></div>
+			<div id="mainload" class="loader-hold"><div class="lds-dual-ring"></div></div>
+		</div>
+	</div>
+
+  <div class="page d-none card mb-3" id="page-login">
+    <div class="card-header"><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a><button id="back-lgn" class="backbtn btn1 btn-primary" onclick="home()">Back</button></div>
+    <div class="card-content p-3">
+      <h4 class="mb-3">Account</h4>
+      <input class="form-control mb-2" id="input-name" maxlength="40" placeholder="Enter your email here"/>
+	  <input class="form-control mb-2" type="Password" id="input-pass" maxlength="40" placeholder="Enter your password here"/><br>
+      <button class="btn1 btn-primary" id="btn-login" onclick="login()">Log in</button>
+	  <button class="btn2 btn-primary" id="btn-login" onclick="signup()">Sign up</button>
+	  <br class="breaklgn"><br class="breaklgn">
+	  <a id="forgot" onclick="forgot()">forgot password?</a>
+	  <p class="error" id="error-login">error</p>
+    </div>
+  </div>
+  
+  <div class="page d-none card mb-3" id="page-verify">
+    <div class="card-header"><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a><button class="lgtbtn btn2 btn-primary" onclick="logout()">Logout</button></div>
+    <div class="card-content p-3">
+      <h4 class="mb-3">Please verify your account</h4><br>
+      <button class="btn1 btn-primary" id="btn-verify" onclick="verify()">Send verification email</button>
+	  <p class="error" id="error-verify">error</p>
+    </div>
+  </div>
+  
+  
+  <div class="page d-none card mb-3" id="page-upload">
+    <div class="card-header"><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a><button class="backbtn btn1 btn-primary" onclick="home()">Back</button></div>
+    <div class="card-content p-3">
+      <h4 class="mb-3">New Repository</h4><br>
+	  <input class="form-control mb-2" id="nameofcode" maxlength="40" placeholder="Name of your Leak"/>
+	  <textarea class="form-control mb-2" id="description" placeholder="Description of your Leak"></textarea>
+	  <img id="output"/>
+	  <h5 id="file-name" >image.png</h5>
+	  <label for="postFile" id="label-file" class="btn1 btn-primary" >Upload a Thumbnail</label>
+      <input type="file" id="postFile" accept="image/*" required /><br>
+	  
+	  <h5 id="file-code" >code.py</h5>
+	  <label for="postCode" id="label-code" class="btn1 btn-primary" >Upload your Code</label>
+      <input type="file" id="postCode" accept=".py, .js, .css, .html, .txt, .cs, .cpp, .csv, .bat, .c, .dll, .hpp, .sdk, .php, .scss, .asp, .jsp, .rb, .xml" multiple/><br>
+	  <button id="uploadbtn" class="btn2 btn-primary" onclick="leak()"><i id="loading" class="fa fa-refresh fa-spin"></i>Leak it!</button>
+	  <p class="error-center" id="error-upload">error</p>
+    </div>
+  </div>
+  
+  <div class="page d-none card mb-3" id="page-forum">
+    <div class="card-header"><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a><button class="backbtn btn1 btn-primary" onclick="home()">Back</button></div>
+    <div class="card-content p-3">
+      <h4 class="mb-3">New Forum</h4><br>
+	  <input class="form-control mb-2" id="nameofforum" maxlength="40" placeholder="Name of your Forum"/>
+	  <textarea class="form-control mb-2" id="description2" placeholder="Description of your Forum"></textarea>
+	  <img id="output2"/>
+	  <h5 id="file-name2" >image.png</h5>
+	  <label for="postFile2" id="label-file2" class="btn1 btn-primary" >Upload a Thumbnail</label>
+      <input type="file" id="postFile2" accept="image/*" required /><br>
+	  
+	  <button id="uploadbtn2" class="btn2 btn-primary" onclick="postForum()"><i id="loading2" class="fa fa-refresh fa-spin"></i>Post it!</button>
+	  <p class="error-center" id="error-upload2">error</p>
+    </div>
+  </div>
+  
+  
+  <div class="page d-none card mb-3" id="page-repository">
+    <div class="card-header"><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a><button class="backbtn btn1 btn-primary" id="back-repo" onclick="home()">Back</button></div>
+    <div class="card-content p-3">
+      <h4 id="repo-name" class="mb-3">Repository</h4>
+      <div class="card-content" id="repo-page"></div>
+    </div>
+  </div>
+  
+  <div class="page d-none card mb-3" id="page-privacy">
+    <div class="card-header"><a id="title" onclick="reload()"> <img id="side-logo" src="logo.png"/> CODE LEAK </a><button class="backbtn btn1 btn-primary" onclick="home()">Back</button></div>
+    <div class="card-content p-3">
+      <h4 id="repo-name" class="mb-3">Privacy Policy</h4>
+      <div class="card-content" id="policy">
+	  </div>
+    </div>
+  </div>
+  
+</div>
+
+<div id="infodiv">
+	<a href="#" onclick="privacy();" >Privacy Policy</a>
+	<a href="https://codeleak.dev/home#contact" >Report A Bug</a>
+</div>
+
+<div id="block">
+	<h5 class='center' >Nothing Found</h5>
+</div>
+
+<div id="block2">
+	<h5 class='center'><i id="blockload" class="fa fa-refresh fa-spin"></i>Loading Post</h5>
+</div>
+<!-- partial -->
+  <script src='https://www.gstatic.com/firebasejs/8.3.0/firebase.js'></script><script  src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+</body>
+</html>

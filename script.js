@@ -1,13 +1,13 @@
 // Initialize Firebase
 var config = {
-	apiKey: "AIzaSyBQ9fqNB50nKwUqeIVND5t7nrbFkJzxCso",
-    authDomain: "code-leak-777f4.firebaseapp.com",
-    databaseURL: "https://code-leak-777f4-default-rtdb.firebaseio.com",
-    projectId: "code-leak-777f4",
-    storageBucket: "code-leak-777f4.appspot.com",
-    messagingSenderId: "103125803204",
-    appId: "1:103125803204:web:080ab4056396fb472ce991",
-    measurementId: "G-XLBR09X11D"
+	apiKey: "---",
+    authDomain: "---",
+    databaseURL: "---",
+    projectId: "---",
+    storageBucket: "---",
+    messagingSenderId: "---",
+    appId: "---",
+    measurementId: "---"
 };
 firebase.initializeApp(config);
 firebase.analytics();
